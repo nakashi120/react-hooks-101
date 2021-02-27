@@ -21,6 +21,13 @@ const App = () => {
     setBody('')
   }
 
+  const deleteAllEvents = e => {
+    e.preventDefault()
+    dispatch({
+      type: 'DELETE_ALL_EVENTS',
+    })
+  }
+
   return (
     <div className="container-fluid">
       <h4>イベント作成フォーム</h4>
@@ -35,7 +42,7 @@ const App = () => {
         </div>
 
         <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
-        <button className="btn btn-danger">すべてのイベントを削除する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents}>すべてのイベントを削除する</button>
       </form>
       <h4>イベント一覧</h4>
       <table className="table table-hover">
@@ -49,25 +56,6 @@ const App = () => {
         </thead>
         <tbody>
           { state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
-          {
-            state.map((event, index) => {
-              const handleClickDeleteButton = () => {
-                dispatch({
-                  type: 'DELETE_EVENT',
-                  id: event.id,
-                })
-              }
-
-              return (
-                <tr key={index}>
-                  <td>{event.id}</td>
-                  <td>{event.title}</td>
-                  <td>{event.body}</td>
-                  <td><button type="button" className="btn btn-danger" onClick={handleClickDeleteButton}>削除</button></td>
-                </tr>
-              )
-            })
-          }
         </tbody>
       </table>
     </div>

@@ -8,7 +8,6 @@ const Event = ({ dispatch, event }) => {
     const result = window.confirm(
       `イベント（id=${id}）を本当に削除してもよいですか？`
     )
-    const DELETE_EVENT = "DELETE_EVENT"
     if (result) dispatch({ type: DELETE_EVENT, id })
   }
 

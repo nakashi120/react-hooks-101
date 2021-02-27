@@ -13,7 +13,7 @@
 //     { id: 12, title:'タイトル12', body: 'ボディー12'},
 // ]
 
-const events = (state = [], action) => {
+const events = (state = [], action) => {    
     switch(action.type) {
         case 'CREATE_EVENT':
             const event = { title: action.title, body: action.body }
@@ -21,6 +21,7 @@ const events = (state = [], action) => {
             const id = length === 0 ? 1 : state[length - 1].id + 1
             return [...state, { id, ...event}]
         case 'DELETE_EVENT':
+            return state.filter(event => event.id != action.id)
         case 'DELETE_ALL_EVENTS':
         default:
             return state
